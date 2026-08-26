@@ -347,6 +347,18 @@ export const institute = {
     land: "Archives indicate the land originally allocated measured more than 7,000m². Part has since been lost to trespass, in the absence of a complete fence and a land title.",
   },
 
+  /*
+    Not from the technical file, which carries no contact details at all.
+    Supplied separately by Joseph and to be confirmed with the institute.
+    The phone is stored in two forms deliberately: `tel` is the E.164 value a
+    dialler needs, `phone` is the grouping a Cameroonian reader expects to see.
+  */
+  contact: {
+    phone: "+237 676 27 60 99",
+    tel: "+237676276099",
+    email: "alobwedececilia@gmail.com",
+  },
+
   governance: [
     {
       role: "Board of Directors",

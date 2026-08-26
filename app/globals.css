@@ -51,6 +51,20 @@
   font-size: 17px;
 }
 
+/*
+  Section rhythm on phones.
+
+  7rem top and bottom is right on a wide screen and wrong on a 375px one: ten
+  sections spend ~2,380px, close to three whole screens, on empty space alone.
+  The token is overridden here rather than made fluid with clamp() so the
+  signed-off desktop layout is bit-for-bit untouched above 768px.
+*/
+@media (max-width: 767px) {
+  :root {
+    --spacing-section: 4.25rem;
+  }
+}
+
 body {
   background-color: var(--color-canvas);
   color: var(--color-ink);

@@ -39,7 +39,7 @@ export function Stakes() {
           lead={s.body}
         />
 
-        <div ref={ref} className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
+        <div ref={ref} className="mt-12 sm:mt-16 grid grid-cols-1 gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
           <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-panel bg-surface">
               <motion.div

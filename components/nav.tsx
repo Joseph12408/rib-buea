@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useLenis } from "lenis/react";
+import { useEffect, useState } from "react";
 import { EASE } from "@/components/primitives";
 import { institute } from "@/lib/institute";
 
@@ -18,8 +19,38 @@ export function Nav() {
   const [lifted, setLifted] = useState(false);
   const [open, setOpen] = useState(false);
   const { scrollY } = useScroll();
+  const lenis = useLenis();
 
   useMotionValueEvent(scrollY, "change", (v) => setLifted(v > 12));
+
+  /*
+    While the panel is open the page behind it must not move. Lenis owns the
+    scroll, so stopping it is what actually locks the page; setting
+    overflow:hidden on body alone would not, because Lenis keeps driving the
+    scroll position from its own rAF loop. The overflow rule is still set for
+    the reduced-motion case, where Lenis is never mounted.
+
+    Escape closes, which is the behaviour a keyboard user expects from anything
+    that covers the page.
+  */
+  useEffect(() => {
+    if (!open) return;
+
+    lenis?.stop();
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+
+    return () => {
+      lenis?.start();
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open, lenis]);
 
   return (
     <motion.header
@@ -99,8 +130,16 @@ export function Nav() {
           </div>
         </nav>
 
-        {open && (
-          <div id="mobile-menu" className="border-t border-border lg:hidden">
+        <AnimatePresence initial={false}>
+          {open && (
+          <motion.div
+            id="mobile-menu"
+            className="overflow-hidden border-t border-border lg:hidden"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.32, ease: EASE }}
+          >
             <ul className="mx-auto max-w-6xl px-6 py-2">
               {LINKS.map((l) => (
                 <li key={l.href}>
@@ -123,8 +162,9 @@ export function Nav() {
                 </a>
               </li>
             </ul>
-          </div>
-        )}
+          </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.header>
   );

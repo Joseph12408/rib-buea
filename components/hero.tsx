@@ -82,7 +82,7 @@ export function Hero() {
       />
 
       <motion.div
-        className="relative mx-auto max-w-4xl px-6 py-32 text-center"
+        className="relative mx-auto max-w-4xl px-6 py-24 text-center sm:py-32"
         style={reduce ? undefined : { y: copyY, opacity: copyOpacity }}
       >
         <motion.p
@@ -115,12 +115,12 @@ export function Hero() {
         </motion.p>
 
         <motion.div
-          className="mt-11 flex flex-col items-center justify-center gap-3 sm:flex-row"
+          className="mx-auto mt-11 flex max-w-xs flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:items-center"
           {...line(0.44)}
         >
           <motion.a
             href="#support"
-            className="inline-flex h-14 min-h-12 items-center justify-center gap-2 rounded-pill bg-accent px-9 text-base font-bold text-white transition-colors duration-200 hover:bg-accent-hover"
+            className="inline-flex h-14 min-h-12 w-full items-center justify-center gap-2 rounded-pill bg-accent px-9 text-base font-bold text-white transition-colors duration-200 hover:bg-accent-hover sm:w-auto"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 420, damping: 28 }}
@@ -131,7 +131,7 @@ export function Hero() {
 
           <motion.a
             href="#stakes"
-            className="inline-flex h-14 min-h-12 items-center justify-center rounded-pill border border-white/40 px-9 text-base font-bold text-white backdrop-blur-sm transition-colors duration-200 hover:border-white hover:bg-white/10"
+            className="inline-flex h-14 min-h-12 w-full items-center justify-center rounded-pill border border-white/40 px-9 text-base font-bold text-white backdrop-blur-sm transition-colors duration-200 hover:border-white hover:bg-white/10 sm:w-auto"
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 420, damping: 28 }}

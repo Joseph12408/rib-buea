@@ -76,7 +76,7 @@ export function Origin() {
           lead="A mission station in Bavenga became a government institute in Buea, and then became the first of its kind in Cameroon."
         />
 
-        <div ref={wrapRef} className="mx-auto mt-16 max-w-3xl">
+        <div ref={wrapRef} className="mx-auto mt-12 sm:mt-16 max-w-3xl">
           <ol className="relative pl-10 sm:pl-14">
             <div
               aria-hidden="true"
@@ -115,7 +115,7 @@ export function Origin() {
         </div>
 
         {/* The mandate the 1980 decree handed it. */}
-        <Reveal className="mx-auto mt-24 max-w-3xl text-center">
+        <Reveal className="mx-auto mt-14 sm:mt-24 max-w-3xl text-center">
           <h3 className="font-display text-[clamp(1.5rem,3vw,2.1rem)] leading-tight font-semibold tracking-[-0.02em] text-ink">
             And with it, three standing instructions.
           </h3>

@@ -41,7 +41,7 @@ export function DailyLife() {
           lead={institute.schedule.note}
         />
 
-        <div ref={ref} className="mt-14">
+        <div ref={ref} className="mt-10 sm:mt-14">
           <Reveal>
             <div className="relative aspect-[16/7] overflow-hidden rounded-panel bg-surface">
               <motion.div
@@ -169,7 +169,7 @@ export function Place() {
           lead={`${inf.intro} ${institute.location.land}`}
         />
 
-        <div className="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div className="mt-10 sm:mt-14 grid grid-cols-1 gap-6 lg:grid-cols-2">
           <Reveal>
             <div className="h-full rounded-panel border border-border bg-canvas p-7 lg:p-9">
               <h3 className="font-display text-xl font-semibold text-ink">
@@ -249,7 +249,7 @@ export function People() {
 
         {/* The numbers, moved here from the hero — they land once the reader has
             a reason to weigh them. */}
-        <div className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-panel border border-border bg-border lg:grid-cols-4">
+        <div className="mt-10 sm:mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-panel border border-border bg-border lg:grid-cols-4">
           {stats.map((s, i) => (
             <motion.div
               key={s.label}
@@ -268,7 +268,7 @@ export function People() {
           ))}
         </div>
 
-        <div ref={ref} className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+        <div ref={ref} className="mt-10 sm:mt-14 grid grid-cols-1 gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <Reveal>
             <div className="relative aspect-[4/3] overflow-hidden rounded-panel bg-surface">
               <motion.div

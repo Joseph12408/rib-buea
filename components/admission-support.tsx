@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { EASE, Reveal, Stagger, staggerChild } from "@/components/primitives";
 import { SectionHeading } from "@/components/section-heading";
 import { institute } from "@/lib/institute";
@@ -107,7 +107,7 @@ export function Support() {
           lead="Named rather than general, so a partner can fund one item outright and know exactly what it did. Orange Cameroon did this once already: the IT workshop and the hen house are theirs."
         />
 
-        <Stagger className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <Stagger className="mt-10 sm:mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {institute.appeals.map((ap) => (
             <motion.article
               key={ap.id}
@@ -201,17 +201,39 @@ export function Visit() {
           </dl>
 
           {/*
-            Placeholder rather than an invented number. A wrong phone number on
-            a public site is worse than none, and the technical file does not
-            contain one.
+            Real links, not text. On a phone the number has to dial and the
+            address has to open a mail client; a donor who has to copy either
+            one by hand is a donor you can lose. Both sit on their own row so
+            the 44px tap target is never in doubt.
           */}
-          <p className="mt-8 inline-flex items-start gap-2 rounded-inner border border-border-strong bg-surface px-4 py-3 text-sm leading-relaxed text-ink-muted">
-            <Phone className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-            <span>
-              Telephone and email to be supplied by the institute &mdash; not
-              present in the source document.
-            </span>
-          </p>
+          <dl className="mt-8 space-y-3 border-t border-border pt-7">
+            <div className="flex gap-4">
+              <dt className="w-28 shrink-0 pt-2.5 text-sm text-ink-faint">
+                Telephone
+              </dt>
+              <dd>
+                <a
+                  href={`tel:${institute.contact.tel}`}
+                  className="-mx-2 inline-flex min-h-11 items-center gap-2.5 rounded-inner px-2 leading-relaxed text-ink transition-colors hover:text-accent"
+                >
+                  <Phone className="size-4 shrink-0 text-ink-faint" aria-hidden="true" />
+                  {institute.contact.phone}
+                </a>
+              </dd>
+            </div>
+            <div className="flex gap-4">
+              <dt className="w-28 shrink-0 pt-2.5 text-sm text-ink-faint">Email</dt>
+              <dd className="min-w-0">
+                <a
+                  href={`mailto:${institute.contact.email}`}
+                  className="-mx-2 inline-flex min-h-11 items-center gap-2.5 rounded-inner px-2 leading-relaxed break-all text-ink transition-colors hover:text-accent"
+                >
+                  <Mail className="size-4 shrink-0 text-ink-faint" aria-hidden="true" />
+                  {institute.contact.email}
+                </a>
+              </dd>
+            </div>
+          </dl>
         </Reveal>
 
         <Reveal delay={0.06}>
@@ -252,6 +274,29 @@ export function Footer() {
             <p className="mt-4 max-w-sm leading-relaxed text-canvas/65">
               {institute.standfirst}
             </p>
+
+            {/* Repeated here because the footer is where people go looking for
+                it, and a donor should never have to scroll back up. */}
+            <ul className="mt-6 space-y-1">
+              <li>
+                <a
+                  href={`tel:${institute.contact.tel}`}
+                  className="-mx-2 inline-flex min-h-11 items-center gap-2.5 rounded-inner px-2 text-canvas/65 transition-colors hover:text-canvas"
+                >
+                  <Phone className="size-4 shrink-0" aria-hidden="true" />
+                  {institute.contact.phone}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${institute.contact.email}`}
+                  className="-mx-2 inline-flex min-h-11 items-center gap-2.5 rounded-inner px-2 break-all text-canvas/65 transition-colors hover:text-canvas"
+                >
+                  <Mail className="size-4 shrink-0" aria-hidden="true" />
+                  {institute.contact.email}
+                </a>
+              </li>
+            </ul>
           </div>
 
           <nav aria-label="Sections">
@@ -290,7 +335,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 border-t border-canvas/15 pt-7">
+        <div className="mt-10 sm:mt-14 border-t border-canvas/15 pt-7">
           <p className="text-sm text-canvas/50">
             &copy; {new Date().getFullYear()} {institute.name}, {institute.city}.
           </p>
