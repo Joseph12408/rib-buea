@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# intermediate source photography (graded output lives in public/img)
+art/raw/
