@@ -67,10 +67,58 @@ dark, and nobody noticed for a month.
 **The domain is not expired.** It is paid until 2027-08-26. Nothing was lost,
 and no money is owed. It only needs the verification email clicked.
 
+## The route back, when the dashboard offers no banner
+
+Joseph could find no verification prompt in the Namecheap dashboard, and the
+Advanced DNS tab was locked. Both are expected: Namecheap disables DNS
+management while a domain is suspended, because the nameservers have been
+taken over.
+
+The way through is the suspension page itself, which is served **over plain
+HTTP, not HTTPS**. `https://rib-buea.com` refuses the connection, which is why
+the first check looked like a dead domain; `http://rib-buea.com` returns 200
+and is Namecheap's "ICANN Verification Needed" page. It carries a
+**Resend My Verification Email** button that sends to the registrant address on
+file, with no login required.
+
+Namecheap's own copy on that page: the suspension lifts once the email is
+verified, and the site reactivates automatically, usually within 24 to 48
+hours.
+
+## How it was actually fixed
+
+Joseph switched the domain from Custom DNS to **Namecheap BasicDNS** in the
+domain settings, and the site came straight back.
+
+That works because the suspension was never a registry-level hold. RDAP showed
+only `client transfer prohibited` throughout, never `clientHold` or
+`serverHold`. Namecheap enforced it purely by replacing the domain's
+nameservers with their two verification hosts. The DNS records Joseph set in
+August were still sitting in BasicDNS untouched; they were simply not in effect
+while the nameservers pointed elsewhere. Switching back put the real
+nameservers, and therefore those records, back in play.
+
+Verified after the change:
+
+| Check | Result |
+|---|---|
+| Nameservers | `dns1`/`dns2.registrar-servers.com` |
+| Apex A | `216.198.79.1` (Vercel apex) |
+| `www` CNAME | `38979d076cd7c0a8.vercel-dns-017.com` |
+| Apex | 308 to `https://www.rib-buea.com` |
+| Payload | 81,873 bytes, identical to the `.vercel.app` build |
+| TLS | `ssl_verify=0`, valid |
+| Registry status | `client transfer prohibited` only, no hold |
+| Nameservers changed | 2026-10-13T18:40:50Z |
+
 ## Still open
 
-- **Joseph must verify the registrant email at Namecheap.** Resend from the
-  Namecheap dashboard, click the link, and the nameservers are restored.
+- **The ICANN verification may still be outstanding.** Nothing observable from
+  outside says whether Namecheap now considers the registrant email verified.
+  The registry shows no hold, and the nameserver change stuck rather than being
+  reverted, which is mildly reassuring. But if it is still pending, Namecheap
+  can swap the nameservers out again and the site will die the same way. The
+  cheap insurance is to confirm the verification in the Namecheap account.
 - **DNS must then be re-pointed at Vercel.** The suspension replaced the
   nameservers, so whatever records were set in August are not in effect. The
   exact A/CNAME values should be read from Vercel's own Domains panel for the
