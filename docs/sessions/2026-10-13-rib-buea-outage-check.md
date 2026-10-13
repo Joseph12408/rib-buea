@@ -126,6 +126,19 @@ Verified after the change:
   over time.
 - **Nothing to fix in the code.** The deployment and repo are healthy.
 
+## Closed out this session
+
+- **The two surplus Vercel projects are gone.** `rib-buea-web.vercel.app` and
+  `rib-buea-site.vercel.app` both return 404; `rib-buea.vercel.app` and
+  `www.rib-buea.com` still return 200. The right one was kept.
+- **The invisible wordmark is parked at Joseph's call.** Not forgotten, not to
+  be fixed unasked.
+- **Real photographs are being shot**, so the eight placeholders are on their
+  way out. The briefs in `art/fetch-photos.mjs` are what they were shot against.
+
+Next session is a batch: the client's proposed changes, collected and applied
+in one pass rather than piecemeal.
+
 ## Worth not repeating
 
 A domain registered for a client should have its verification email confirmed
